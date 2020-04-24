@@ -50,6 +50,8 @@
 </div>
 <!--该行用webpack打包时注释，直接使用时不注释-->
 <script type="text/javascript" src="./scripts/index.js"></script>
+<script type="text/javascript" src="./scripts/position.js"></script>
+<script type="text/javascript" src="./scripts/math.min.js"></script>
 <script>
     var db = new loki('db'); // 新建数据库 db
     var CalPath = db.addCollection('CalPath'); // 新建表 CalPath
@@ -76,7 +78,7 @@
                 document.getElementById("rotationAlpha").innerHTML = rotationAlpha;
                 document.getElementById("rotationBeta").innerHTML = rotationBeta;
                 document.getElementById("rotationGamma").innerHTML = rotationGamma;
-                document.getElementById("time").innerHTML = timeNow;
+                document.getElementById("time").innerHTML = timeNow - startTime;
 
                 CalPath.insert( { id: idNow, time: timeNow - startTime,
                     ax: accelerationX, ay: accelerationY, az: accelerationZ,
