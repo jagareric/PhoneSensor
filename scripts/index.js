@@ -1,9 +1,3 @@
-// TODO:当前基于每次从服务器获得一个新点来设计，或许需要改成获取一组新点
-// TODO:考虑到收包顺序的不确定，为确定当前位置，可能需要对点进行编号，编号最靠后的认为是当前位置
-// TODO:考虑到数据溢出的风险，或许需要增加自动删除traceData中数据的功能，考虑用array.shift()实现
-// TODO:data.json会留一些冗余以应对网络波动，需要增加根据序号筛选掉重复点的功能
-// TODO:时间充裕且确有必要的话可以加入根据网络状况(重复数据的量）动态调整下载数据速度的功能
-// TODO:时间充裕且确有必要的话可以加入与服务器协商更新数据量的功能
 var traceData = [] // 历史点
 var pointNum = [] // 已绘制点的编号
 var currentNum // 当前点的编号
@@ -49,6 +43,37 @@ function addData(){
             });
         }
     });
+}
+
+async function addData2(data){
+    // 异步加载数据
+    // 传入数据：{number: id, location: [x, y, z]}
+    // 填入更新的位置数据
+    currentNum = data['number']
+    // 未画过新点时才画
+    if (!pointNum.includes(currentNum)){
+        console.log(String(currentNum) + ' is drawing')
+        // currentPoint = data['location']
+
+        traceData.push(currentPoint)
+        console.log('Trace is ' +　String(traceData))
+        console.log('currentPoint' +　[currentPoint])
+        pointNum.push(data.number)
+        myChart.setOption({
+            series:
+                [
+                    {
+                        // 根据名字对应到相应的系列
+                        name: '轨迹',
+                        data: traceData
+                    },
+                    {
+                        // 根据名字对应到相应的系列
+                        name: '当前位置',
+                        data: [currentPoint]
+                    }]
+        });
+    }
 }
 // 基于准备好的dom，初始化echarts实例
 var myChart = echarts.init(document.getElementById('main'));
@@ -177,12 +202,18 @@ var drawInterval
 $("#start").click(function(){
     recordData = true;
     startTime = Date.now();
+    position();
 });
 
 // 按钮-结束
 var finishCode
 $("#finish").click(function(){
     recordData = false;
+    CalPath.insert( { id: idNow + 1, time: 0,
+        ax: 10, ay: 10, az: 10,
+        wx: 10, wy: 10, wz: 10,
+        used: false, calculated: false
+    } )
 });
 
 // 按钮-清除轨迹

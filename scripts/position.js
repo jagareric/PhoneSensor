@@ -1,18 +1,20 @@
 // array.splice(第几个数开始，删除几个数，要添加的数据)
-function position()
+async function position()
 {
     var i = 2, s = 50, q0= [[1],[0],[0],[0]], v0 = [[0],[0],[0]], s0 = [[0],[0],[0]];
     var H0= [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
     var q1, v1, s1, H1;
     // 下标1表示是当前值，下标0存储的上一时刻点的值
     // i是对当前进行到第几个点的标号 s是由于需要求加速度的前后各s个点的方差
-    var ax, ay, az, wx, wy, wz, T;
+    var id, ax, ay, az, wx, wy, wz, T;
+    var returnData;
     while(1)
     {
         // TODO:数据读取的部分暂时还空着，假设这个部分已经正常读取了
         var data0 = CalPath.chain().where(function (obj) { return obj.id === (i-1) }).data()[0];
         var data1 = CalPath.chain().where(function (obj) { return obj.id === i }).data()[0];
         // 这里是再从内存数据库中提取我们所存储的数据，data1表示当前时间点 data0表示上一时间点。
+        id = data1.id;
         wx = data1.wx;
         wy = data1.wy;
         wz = data1.wz;
@@ -53,6 +55,9 @@ function position()
         data1.vy = obj.v2;
         data1.vz = obj.v3;
         // 此处把数据写入进数据库中，然后重置此处数组
+        returnData = {number: id, location:[obj.s1,obj.s2,obj.s3]};
+        addData2(returnData);
+        // 调用画图函数
         v0 = v1;
         s0 = s1;
         H0 = H1;
@@ -133,7 +138,7 @@ function pos_cal(ax, ay, az, T, q1, v0, s0)
     // c1-c9分别是3*3矩阵中的各个区域的值
     a = [[ax],[ay],[az]];
     G = [[0],[0],[-g]];
-    a = math.add(math.multiply(c,a),G);
+    a = math.add(math.multiply(C,a),G);
     // 减去竖直方向上的重力加速度影响
     V = math.add(v0, math.multiply(a, T));
     S = math.add(s0, math.multiply(T,v0), math.multiply(0.5, T ** 2, a))
