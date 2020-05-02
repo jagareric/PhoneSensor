@@ -12,118 +12,117 @@
 
     <title>基于手机传感器的实验目标布设</title>
 </head>
-<!--加载时滑倒最底部以确保按钮能显示-->
-<!--<body onload="window.scrollTo(0,document.body.scrollHeight);">-->
 <body>
 <div class="jumbotron" style="width:100%;max-height:10vh;padding: 2rem 1rem;margin-bottom:0">
     <h4>基于手机传感器的实验目标布设</h4>
     <!--    <p>利用惯性数据进行定位计算</p>-->
 </div>
 
-<div class="container" style="width:100%;height:40vh">
-    <table class="table table-responsive">
-<!--        <caption>表格</caption>-->
-        <thead class="w-100">
-        <tr class="text-center">
-            <th class="col-3">名称</th>
-            <th class="col-3">X</th>
-            <th class="col-3">Y</th>
-            <th class="col-3">Z</th>
-            <th class="col-3">操作</th>
-        </tr>
-        </thead>
-        <tbody class="w-100">
-        <tr class="text-center">
-            <td class="col-3">初始高度</td>
-<!--            <td><textarea class="form-control" type="text"  rows="2" readonly>初始高度</textarea></td>-->
-            <td class="col-3"></td>
-            <td class="col-3"></td>
-            <td class="col-3"><input id="beginHeight" type="text" class="form-control"></td>
-            <td class="col-3"><a href="#" class="btn btn-info btn-xs" id="setHeight" style="padding: 0;">设置</a></td>
-        </tr>
-        <tr class="text-center">
-            <td class="col-3">布设目标</td>
-            <td class="col-3"><input id="targetX" type="text" class="form-control"></td>
-            <td class="col-3"><input id="targetY" type="text" class="form-control"></td>
-            <td class="col-3"><input id="targetZ" type="text" class="form-control"></td>
-            <td class="col-3"><a href="#" class="btn btn-info btn-xs" id="setTarget" style="padding: 0;">设置</a></td>
-        </tr>
-        <tr class="text-center">
-            <td class="col-3">当前坐标</td>
-            <td class="col-3"><input id="currentX" type="text" class="form-control"></td>
-            <td class="col-3"><input id="currentY" type="text" class="form-control"></td>
-            <td class="col-3"><input id="currentZ" type="text" class="form-control"></td>
-            <td class="col-3"></td>
-        </tr>
-        <tr class="text-center">
-            <td class="col-3">调整量</td>
-            <td class="col-3"><input id="deltaX" type="text" class="form-control"></td>
-            <td class="col-3"><input id="deltaY" type="text" class="form-control"></td>
-            <td class="col-3"><input id="deltaZ" type="text" class="form-control"></td>
-            <td class="col-3"></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
 <div class="container" style="width:100%;height:50vh">
-<!--    <div id="content">-->
-<!--        <div id="sphere"></div>-->
-<!--        <ul>-->
-<!--            <h3>加速度计数据：</h3>-->
-<!--            <li>acceleration x: <span id="accelerationX"></span> m/s^2</li>-->
-<!--            <li>acceleration y: <span id="accelerationY"></span> m/s^2</li>-->
-<!--            <li>acceleration z: <span id="accelerationZ"></span> m/s^2</li>-->
-<!--            <h3>陀螺仪数据：</h3>-->
-<!--            <li>rotation alpha: <span id="rotationAlpha"></span> degree</li>-->
-<!--            <li>rotation beta: <span id="rotationBeta"></span> degree</li>-->
-<!--            <li>rotation gamma: <span id="rotationGamma"></span> degree</li>-->
-<!--            <h3>时间：</h3>-->
-<!--            <li>时间戳：<span id="time"></span> ms</li>-->
-<!--        </ul>-->
-<!--    </div>-->
+    <div class="table-responsive">
+        <table class="table text-nowrap">
+            <!--        <caption>表格</caption>-->
+            <thead>
+            <tr class="text-center">
+                <th>名称</th>
+                <th>X</th>
+                <th>Y</th>
+                <th>Z</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="text-center">
+                <td style="vertical-align: middle;padding:3px;">初始高度</td>
+                <td></td>
+                <td></td>
+                <td style="vertical-align: middle;padding:3px;"><input id="beginHeight" type="text" class="form-control"></td>
+                <td><a href="#" class="btn btn-info btn-xs" id="setHeight" style="padding: 3px;">设置</a></td>
+            </tr>
+            <tr class="text-center">
+                <td style="vertical-align: middle;padding:3px;">布设目标</td>
+                <td style="vertical-align: middle;padding:3px;"><input id="targetX" type="text" class="form-control"></td>
+                <td style="vertical-align: middle;padding:3px;"><input id="targetY" type="text" class="form-control"></td>
+                <td style="vertical-align: middle;padding:3px;"><input id="targetZ" type="text" class="form-control"></td>
+                <td><a href="#" class="btn btn-info btn-xs" id="setTarget" style="padding: 3px;">设置</a></td>
+            </tr>
+            <tr class="text-center">
+                <td style="vertical-align: middle;padding:3px;">当前坐标</td>
+                <td style="vertical-align: middle;padding:3px;"><input id="currentX" type="text" class="form-control" readonly></td>
+                <td style="vertical-align: middle;padding:3px;"><input id="currentY" type="text" class="form-control" readonly></td>
+                <td style="vertical-align: middle;padding:3px;"><input id="currentZ" type="text" class="form-control" readonly></td>
+                <td></td>
+            </tr>
+            <tr class="text-center">
+                <td style="vertical-align: middle;padding:3px;">调整量</td>
+                <td style="vertical-align: middle;padding:3px;"><input id="deltaX" type="text" class="form-control" readonly></td>
+                <td style="vertical-align: middle;padding:3px;"><input id="deltaY" type="text" class="form-control" readonly></td>
+                <td style="vertical-align: middle;padding:3px;"><input id="deltaZ" type="text" class="form-control" readonly></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
     <div class="panel panel-default">
-        <div class="panel-body" id="main" style="width:100%;height:45vh"></div>
         <div class="container"  style="width:100%;height:5vh">
             <div class="btn-group btn-group-justified" style="width:100%">
                 <a href="#" class="btn btn-success" id="start">开始</a>
                 <a href="#" class="btn btn-danger" id="finish">结束</a>
                 <a href="#" class="btn btn-warning" id="clearTrace">清除轨迹</a>
-                <a href="#" class="btn btn-danger">退出</a>
+                <a href="#" class="btn btn-danger" id="reload">重置</a>
             </div>
         </div>
+        <div class="panel-body" id="main" style="width:100%;height:45vh"></div>
+    </div>
+    <div id="content">
+        <div id="sphere"></div>
+        <ul>
+            <h3>加速度计数据：</h3>
+            <li>acceleration x: <span id="accelerationX"></span> m/s^2</li>
+            <li>acceleration y: <span id="accelerationY"></span> m/s^2</li>
+            <li>acceleration z: <span id="accelerationZ"></span> m/s^2</li>
+            <h3>陀螺仪数据：</h3>
+            <li>rotation alpha: <span id="rotationAlpha"></span> degree/s</li>
+            <li>rotation beta: <span id="rotationBeta"></span> degree/s</li>
+            <li>rotation gamma: <span id="rotationGamma"></span> degree/s</li>
+            <h3>时间：</h3>
+            <li>时间戳：<span id="time"></span> ms</li>
+        </ul>
     </div>
 </div>
 <!--该行用webpack打包时注释，直接使用时不注释-->
 <script type="text/javascript" src="./scripts/index.js"></script>
 <script type="text/javascript" src="./scripts/position.js"></script>
 <script type="text/javascript" src="./scripts/math.min.js"></script>
-<script>
-    var db = new loki('db'); // 新建数据库 db
-    var CalPath = db.addCollection('CalPath'); // 新建表 CalPath
-    var recordData = false; // 判断是否需要记录数据
-    var startTime = 0; // 开始记录数据时的时间戳
-    var fixed = 6; // 传感器数据位数
-    var idNow = 1; // 数据唯一标识
+<script type="text/javascript">
+    var db = new loki('db');  // 新建数据库 db
+    var CalPath = db.addCollection('CalPath');  // 新建表 CalPath
+    var recordData = false;  // 判断是否需要记录数据
+    var startTime = 0;  // 开始记录数据时的时间戳
+    var fixed = 6;  // 传感器数据位数
+    var idNow = 1;  // 数据唯一标识
+    var numberPre = 50;  // 需要使用前多少个数据
+    var numberPost = 50;  // 需要使用后多少个数据
 
     // 获取传感器数据
     if (window.DeviceMotionEvent) {
         window.ondevicemotion = function (e) {
             if(recordData){
-                var accelerationX = e.accelerationIncludingGravity.x.toFixed(fixed);
-                var accelerationY = e.accelerationIncludingGravity.y.toFixed(fixed);
-                var accelerationZ = e.accelerationIncludingGravity.z.toFixed(fixed);
-                var rotationAlpha = e.rotationRate.alpha.toFixed(fixed);
-                var rotationBeta = e.rotationRate.beta.toFixed(fixed);
-                var rotationGamma = e.rotationRate.gamma.toFixed(fixed);
+                var accelerationX = (e.acceleration.x).toFixed(fixed);
+                var accelerationY = (e.acceleration.y).toFixed(fixed);
+                var accelerationZ = (e.acceleration.z).toFixed(fixed);
+                var rotationAlpha = (e.rotationRate.alpha).toFixed(fixed);
+                var rotationBeta = (e.rotationRate.beta).toFixed(fixed);
+                var rotationGamma = (e.rotationRate.gamma).toFixed(fixed);
                 var timeNow = Date.now();
 
-                // document.getElementById("accelerationX").innerHTML = accelerationX;
-                // document.getElementById("accelerationY").innerHTML = accelerationY;
-                // document.getElementById("accelerationZ").innerHTML = accelerationZ;
-                // document.getElementById("rotationAlpha").innerHTML = rotationAlpha;
-                // document.getElementById("rotationBeta").innerHTML = rotationBeta;
-                // document.getElementById("rotationGamma").innerHTML = rotationGamma;
-                // document.getElementById("time").innerHTML = timeNow - startTime;
+                document.getElementById("accelerationX").innerHTML = accelerationX;
+                document.getElementById("accelerationY").innerHTML = accelerationY;
+                document.getElementById("accelerationZ").innerHTML = accelerationZ;
+                document.getElementById("rotationAlpha").innerHTML = rotationAlpha;
+                document.getElementById("rotationBeta").innerHTML = rotationBeta;
+                document.getElementById("rotationGamma").innerHTML = rotationGamma;
+                document.getElementById("time").innerHTML = timeNow - startTime;
 
                 CalPath.insert( { id: idNow, time: timeNow - startTime,
                     ax: accelerationX, ay: accelerationY, az: accelerationZ,
@@ -131,12 +130,327 @@
                     vx: 0, vy: 0, vz: 0,
                     sx: 0, sy: 0, sz: 0,
                     used: false, calculated: false
-                } )
+                } );
+
+                if(idNow >= (numberPre + 1 + numberPost)){
+                    let data_all = CalPath.chain().offset(idNow - (numberPre + 1 + numberPost)).limit(numberPre + 1 + numberPost).data();
+                    position(data_all.slice(0, numberPre), data_all[numberPre], data_all.slice(numberPre + 1));
+                }
+
                 idNow++;
             }
         }
     }
+</script>
 
+<script type="text/javascript">
+    function standstill() {
+        CalPath.clear();
+        var fakeTime = 0;
+        idNow = 1;
+        for(let i = 0; i < 500; i++){
+            CalPath.insert( { id: idNow, time: fakeTime,
+                ax: 0, ay: 0, az: 0,
+                wx: 0, wy: 0, wz: 0,
+                vx: 0, vy: 0, vz: 0,
+                sx: 0, sy: 0, sz: 0,
+                used: false, calculated: false
+            } );
+
+            if(idNow >= (numberPre + 1 + numberPost)){
+                let data_all = CalPath.chain().offset(idNow - (numberPre + 1 + numberPost)).limit(numberPre + 1 + numberPost).data();
+                position(data_all.slice(0, numberPre), data_all[numberPre], data_all.slice(numberPre + 1));
+            }
+
+            idNow++;
+            fakeTime += 0.01;
+        }
+    }
+
+    function straight() {
+        CalPath.clear();
+        var fakeTime = 0;
+        idNow = 1;
+        for(let i = 0; i < 600; i++){
+            CalPath.insert( { id: idNow, time: fakeTime,
+                ax: 1, ay: 1.5, az: 0,
+                wx: 0, wy: 0, wz: 0,
+                vx: 0, vy: 0, vz: 0,
+                sx: 0, sy: 0, sz: 0,
+                used: false, calculated: false
+            } );
+
+            if(idNow >= (numberPre + 1 + numberPost)){
+                let data_all = CalPath.chain().offset(idNow - (numberPre + 1 + numberPost)).limit(numberPre + 1 + numberPost).data();
+                position(data_all.slice(0, numberPre), data_all[numberPre], data_all.slice(numberPre + 1));
+            }
+
+            idNow++;
+            fakeTime += 0.01;
+        }
+    }
+
+    function x2() {
+        CalPath.clear();
+        var fakeTime = 0;
+        idNow = 1;
+        for(let i = 0; i < 200; i++){
+            CalPath.insert( { id: idNow, time: fakeTime,
+                ax: 0.01, ay: 0, az: 0,
+                wx: 0, wy: 0, wz: 0,
+                vx: 0, vy: 0, vz: 0,
+                sx: 0, sy: 0, sz: 0,
+                used: false, calculated: false
+            } );
+
+            if(idNow >= (numberPre + 1 + numberPost)){
+                let data_all = CalPath.chain().offset(idNow - (numberPre + 1 + numberPost)).limit(numberPre + 1 + numberPost).data();
+                position(data_all.slice(0, numberPre), data_all[numberPre], data_all.slice(numberPre + 1));
+            }
+
+            idNow++;
+            fakeTime += 0.01;
+        }
+
+        for(let i = 0; i < 300; i++){
+            CalPath.insert( { id: idNow, time: fakeTime,
+                ax: 0, ay: 0.01, az: 0,
+                wx: 0, wy: 0, wz: 0,
+                vx: 0, vy: 0, vz: 0,
+                sx: 0, sy: 0, sz: 0,
+                used: false, calculated: false
+            } );
+
+            if(idNow >= (numberPre + 1 + numberPost)){
+                let data_all = CalPath.chain().offset(idNow - (numberPre + 1 + numberPost)).limit(numberPre + 1 + numberPost).data();
+                position(data_all.slice(0, numberPre), data_all[numberPre], data_all.slice(numberPre + 1));
+            }
+
+            idNow++;
+            fakeTime += 0.01;
+        }
+    }
+
+    function circle() {
+        CalPath.clear();
+        var fakeTime = 0;
+        idNow = 1;
+        for(let i = 0; i < 250; i++){
+            CalPath.insert( { id: idNow, time: fakeTime,
+                ax: 0.01, ay: 0, az: 0,
+                wx: 0, wy: 0, wz: 0,
+                vx: 0, vy: 0, vz: 0,
+                sx: 0, sy: 0, sz: 0,
+                used: false, calculated: false
+            } );
+
+            if(idNow >= (numberPre + 1 + numberPost)){
+                let data_all = CalPath.chain().offset(idNow - (numberPre + 1 + numberPost)).limit(numberPre + 1 + numberPost).data();
+                position(data_all.slice(0, numberPre), data_all[numberPre], data_all.slice(numberPre + 1));
+            }
+
+            idNow++;
+            fakeTime += 1000;
+        }
+
+        acc = 0.02;
+        for(let t = 0; t < 800; t++){
+            acc_x = acc * Math.cos(1.5 * Math.PI - 0.01 * t);
+            acc_y = acc * Math.sin(1.5 * Math.PI - 0.01 * t);
+            CalPath.insert( { id: idNow, time: fakeTime,
+                ax: acc_x, ay: acc_y, az: 0,
+                wx: 0, wy: 0, wz: 0,
+                vx: 0, vy: 0, vz: 0,
+                sx: 0, sy: 0, sz: 0,
+                used: false, calculated: false
+            } );
+
+            if(idNow >= (numberPre + 1 + numberPost)){
+                let data_all = CalPath.chain().offset(idNow - (numberPre + 1 + numberPost)).limit(numberPre + 1 + numberPost).data();
+                position(data_all.slice(0, numberPre), data_all[numberPre], data_all.slice(numberPre + 1));
+            }
+
+            idNow++;
+            fakeTime += 1000;
+        }
+
+    }
+
+    function circle_with_rotation() {
+        CalPath.clear();
+        var fakeTime = 0;
+        idNow = 1;
+        for(let i = 0; i < 350; i++){
+            CalPath.insert( { id: idNow, time: fakeTime,
+                ax: 1, ay: 0, az: 0,
+                wx: 0, wy: 0, wz: 0,
+                vx: 0, vy: 0, vz: 0,
+                sx: 0, sy: 0, sz: 0,
+                used: false, calculated: false
+            } );
+
+            if(idNow >= (numberPre + 1 + numberPost)){
+                let data_all = CalPath.chain().offset(idNow - (numberPre + 1 + numberPost)).limit(numberPre + 1 + numberPost).data();
+                position(data_all.slice(0, numberPre), data_all[numberPre], data_all.slice(numberPre + 1));
+            }
+
+            idNow++;
+            fakeTime += 10;
+        }
+
+        acc = 3;
+        for(let t = 0; t < 678; t++){
+            wzz = 0.5;
+            CalPath.insert( { id: idNow, time: fakeTime,
+                ax: 0, ay: -acc, az: 0,
+                wx: 0, wy: 0, wz: wzz,
+                vx: 0, vy: 0, vz: 0,
+                sx: 0, sy: 0, sz: 0,
+                used: false, calculated: false
+            } );
+
+            if(idNow >= (numberPre + 1 + numberPost)){
+                let data_all = CalPath.chain().offset(idNow - (numberPre + 1 + numberPost)).limit(numberPre + 1 + numberPost).data();
+                position(data_all.slice(0, numberPre), data_all[numberPre], data_all.slice(numberPre + 1));
+            }
+
+            idNow++;
+            fakeTime += 10;
+        }
+    }
+
+    function line_corner() {
+        CalPath.clear();
+        var fakeTime = 0;
+        idNow = 1;
+        for(let i = 0; i < 110; i++){
+            CalPath.insert( { id: idNow, time: fakeTime,
+                ax: 1, ay: 0, az: 0,
+                wx: 0, wy: 0, wz: 0,
+                vx: 0, vy: 0, vz: 0,
+                sx: 0, sy: 0, sz: 0,
+                used: false, calculated: false
+            } );
+
+            if(idNow >= (numberPre + 1 + numberPost)){
+                let data_all = CalPath.chain().offset(idNow - (numberPre + 1 + numberPost)).limit(numberPre + 1 + numberPost).data();
+                position(data_all.slice(0, numberPre), data_all[numberPre], data_all.slice(numberPre + 1));
+            }
+
+            idNow++;
+            fakeTime += 10;
+        }
+
+        for(let i = 0; i < 60; i++){
+            CalPath.insert( { id: idNow, time: fakeTime,
+                ax: -1, ay: 0, az: 0,
+                wx: 0, wy: 0, wz: 0,
+                vx: 0, vy: 0, vz: 0,
+                sx: 0, sy: 0, sz: 0,
+                used: false, calculated: false
+            } );
+
+            if(idNow >= (numberPre + 1 + numberPost)){
+                let data_all = CalPath.chain().offset(idNow - (numberPre + 1 + numberPost)).limit(numberPre + 1 + numberPost).data();
+                position(data_all.slice(0, numberPre), data_all[numberPre], data_all.slice(numberPre + 1));
+            }
+
+            idNow++;
+            fakeTime += 10;
+        }
+
+        for(let i = 0; i < 10; i++) {
+            CalPath.insert({
+                id: idNow, time: fakeTime,
+                ax: 0, ay: 0, az: 0,
+                wx: 0, wy: 0, wz: 0,
+                vx: 0, vy: 0, vz: 0,
+                sx: 0, sy: 0, sz: 0,
+                used: false, calculated: false
+            });
+
+            if (idNow >= (numberPre + 1 + numberPost)) {
+                let data_all = CalPath.chain().offset(idNow - (numberPre + 1 + numberPost)).limit(numberPre + 1 + numberPost).data();
+                position(data_all.slice(0, numberPre), data_all[numberPre], data_all.slice(numberPre + 1));
+            }
+
+            idNow++;
+            fakeTime += 1000;
+        }
+
+        for(let i = 0; i < 1; i++){
+            CalPath.insert( { id: idNow, time: fakeTime,
+                ax: 0, ay: 0, az: 0,
+                wx: 0, wy: 0, wz: Math.PI * 0.5,
+                vx: 0, vy: 0, vz: 0,
+                sx: 0, sy: 0, sz: 0,
+                used: false, calculated: false
+            } );
+
+            if(idNow >= (numberPre + 1 + numberPost)){
+                let data_all = CalPath.chain().offset(idNow - (numberPre + 1 + numberPost)).limit(numberPre + 1 + numberPost).data();
+                position(data_all.slice(0, numberPre), data_all[numberPre], data_all.slice(numberPre + 1));
+            }
+
+            idNow++;
+            fakeTime += 1000;
+        }
+
+            for(let i = 0; i < 10; i++) {
+                CalPath.insert({
+                    id: idNow, time: fakeTime,
+                    ax: 0, ay: 0, az: 0,
+                    wx: 0, wy: 0, wz: 0,
+                    vx: 0, vy: 0, vz: 0,
+                    sx: 0, sy: 0, sz: 0,
+                    used: false, calculated: false
+                });
+
+                if (idNow >= (numberPre + 1 + numberPost)) {
+                    let data_all = CalPath.chain().offset(idNow - (numberPre + 1 + numberPost)).limit(numberPre + 1 + numberPost).data();
+                    position(data_all.slice(0, numberPre), data_all[numberPre], data_all.slice(numberPre + 1));
+                }
+
+                idNow++;
+                fakeTime += 1000;
+            }
+
+        for(let i = 0; i < 60; i++){
+            CalPath.insert( { id: idNow, time: fakeTime,
+                ax: 1, ay: 0, az: 0,
+                wx: 0, wy: 0, wz: 0,
+                vx: 0, vy: 0, vz: 0,
+                sx: 0, sy: 0, sz: 0,
+                used: false, calculated: false
+            } );
+
+            if(idNow >= (numberPre + 1 + numberPost)){
+                let data_all = CalPath.chain().offset(idNow - (numberPre + 1 + numberPost)).limit(numberPre + 1 + numberPost).data();
+                position(data_all.slice(0, numberPre), data_all[numberPre], data_all.slice(numberPre + 1));
+            }
+
+            idNow++;
+            fakeTime += 10;
+        }
+
+        for(let i = 0; i < 110; i++){
+            CalPath.insert( { id: idNow, time: fakeTime,
+                ax: -1, ay: 0, az: 0,
+                wx: 0, wy: 0, wz: 0,
+                vx: 0, vy: 0, vz: 0,
+                sx: 0, sy: 0, sz: 0,
+                used: false, calculated: false
+            } );
+
+            if(idNow >= (numberPre + 1 + numberPost)){
+                let data_all = CalPath.chain().offset(idNow - (numberPre + 1 + numberPost)).limit(numberPre + 1 + numberPost).data();
+                position(data_all.slice(0, numberPre), data_all[numberPre], data_all.slice(numberPre + 1));
+            }
+
+            idNow++;
+            fakeTime += 10;
+        }
+    }
 </script>
 </body>
 </html>
