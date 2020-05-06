@@ -122,7 +122,7 @@ var option = {
 myChart.setOption(option);
 // 窗口大小调整时重新绘图以实现实时响应式
 window.addEventListener('resize', () => {
-    myChart.resize() // 多个图表，第一个图表
+    myChart.resize() 
 })
 
 // 按钮-开始

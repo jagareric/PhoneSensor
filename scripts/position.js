@@ -5,7 +5,7 @@ s0 = s1 = [0,0,0];
 H0 = H1 = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
 
 function position(data_pre, data_now, data_post){
-    // 调用本函数的时候就已经从内存数据库中提取我们所存储的数据
+    // 调用本函数的时候就已经从内存数据库中提取所存储的数据
     // data_now表示当前时间点 data_pre表示前五十个点的数据，同理data_post为后五十个点，总共101个点。
     // console.log(s0);
     // console.log(s0[1]);
@@ -36,15 +36,20 @@ function position(data_pre, data_now, data_post){
     if(c===0){  // 0加速度条件下
         wx = wy = wz = ax = ay = az = 0;
         // 判断为0加速度，则保持原速度不变前进T秒
-        s1[0] = s0[0] + v0[0] * T;
-        s1[1] = s0[1] + v0[1] * T;
-        s1[2] = s0[2] + v0[2] * T;
+        // s1[0] = s0[0] + v0[0] * T;
+        // s1[1] = s0[1] + v0[1] * T;
+        // s1[2] = s0[2] + v0[2] * T;
+        //判断为0速度时刻，则认为此刻人站立没动，不产生位移
+        s1[0] = s0[0] ;
+        s1[1] = s0[1] ;
+        s1[2] = s0[2] ;
         // 画图
         returnData = {number: id, location:[s1[0],s1[1],s1[2]]}
         addData2(returnData);
         s0 = s1;
-        q0 = [[1],[0],[0],[0]];
-        H0 = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];  // 重置数据
+        v0 = [0,0,0];
+        //q0 = [[1],[0],[0],[0]]; //！！！这里有问题。四元数重置不能重置成1000，需要重置为前一个时刻的四元数！！！
+        H0 = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];  // 重置4维化角速度矩阵，因视作静止，角速度计0
     }
 
     if(c===1){// 非0加速度条件下
@@ -63,7 +68,7 @@ function position(data_pre, data_now, data_post){
 }
 
 function zero_judge(data_pre, data_now, data_post){
-    var th1=0.5, th2=0.3, s=50;
+    var th1=0.5, th2=5, s=50;
     var a_var, am=[], c=1;
     a = math.sqrt(data_now.ax ** 2 + data_now.ay ** 2 + data_now.az ** 2);
     w = math.sqrt(data_now.wx ** 2 + data_now.wy ** 2 + data_now.wz ** 2);
@@ -71,7 +76,7 @@ function zero_judge(data_pre, data_now, data_post){
     // a和w为当前点的加速度和角速度幅值
     if( a < th1 && w < th2){
         // 采集前后共2s+1组数据,求加速度方差
-        // 提取后前十个数据
+        // 提取前五十个数据
         for(k=0; k<s; k++){
             am[k] = math.sqrt(data_pre[k].ax ** 2 + data_pre[k].ay ** 2 + data_pre[k].az ** 2);
         }
