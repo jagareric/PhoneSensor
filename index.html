@@ -130,7 +130,7 @@
                     wx: rotationAlpha, wy: rotationBeta, wz: rotationGamma,
                 } );
 
-                if(idNow >= (numberPre + 1 + numberPost)){
+                if(idNow >= (numberPre + 1 + numberPost))/*&counter去计数，每100个，取mod模，counter100=0；counter作为全剧变量，每次+1没100个更新一次*/{
                     let data_all = CalPath.chain().offset(idNow - (numberPre + 1 + numberPost)).limit(numberPre + 1 + numberPost).data();
                     position(data_all.slice(0, numberPre), data_all[numberPre], data_all.slice(numberPre + 1));
                 }

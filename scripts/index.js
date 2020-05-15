@@ -1,8 +1,9 @@
 var traceData = [] // 历史点
 var pointNum = [] // 已绘制点的编号
 var currentNum // 当前点的编号
-var currentPoint = [] //当前点
+var currentPoint = [] //当前点，仅包含x,y坐标
 var testPoint //目标点
+//已绘制的点的数组，只含x,y坐标
 traceData = []
 // 目标点数组，只含x,y
 testPoint = []
@@ -20,17 +21,18 @@ async function addData2(data){
         console.log('id:' + String(currentNum) + ' is drawing')
         // currentPoint = data['location']
         let temp = data['location']
-        temp[2] = temp[2] + parseFloat(beginHeight)
-        $("#currentX").val(String(temp[0]));
+        temp[2] = temp[2] + parseFloat(beginHeight) //添加初始高度
+        $("#currentX").val(String(temp[0]));  //页面上获取并显示当前点的x,y,z坐标
         $("#currentY").val(String(temp[1]));
         $("#currentZ").val(String(temp[2]));
         // console.log('当前显示坐标为 ' +　String(temp))
-        currentPoint = [temp[0], temp[1]]
-        traceData.push(currentPoint)
+        currentPoint = [temp[0], temp[1]]  //从position计算的函数结果的返回值得到当前点的x,y坐标
+        traceData.push(currentPoint) //当前点坐标push进历史点数组
         // console.log('Trace is ' +　String(traceData))
         console.log('currentPoint' +　' (' + [currentPoint] + ')')
-        calcNext(targetList,temp)
-        pointNum.push(currentNum)
+        calcNext(targetList,temp) //计算当前点和最近距离的目标点之间的调整量，并把差值显示出来
+        pointNum.push(currentNum)  //当前点编号push进已绘制点编号数组
+//当traceData中的数据，150个画一次历史轨迹？
         myChart.setOption({
             series:
                 [
@@ -47,6 +49,7 @@ async function addData2(data){
         });
     }
 }
+
 // 基于准备好的dom，初始化echarts实例
 var myChart = echarts.init(document.getElementById('main'));
 // 指定图表的配置项和数据
@@ -88,7 +91,7 @@ var option = {
                         color: '#0099CC',
                         data:[],
                         name:'轨迹',
-                        type: 'line' // TODO:或可用'scatter'
+                        type: 'line' 
                     },
                     {
                         symbolSize: 20,
@@ -157,7 +160,7 @@ var beginHeight = 0;
 $("#setHeight").click(function(){
     let temp = $("#beginHeight").val();
     if ($.isNumeric(temp)){ // 为数字的时候才继续执行
-        beginHeight = temp;
+        beginHeight = temp; //把人为输入进去的初始数赋给beginHeight
     }
     else {
         console.log('输入数据非数字');
@@ -173,9 +176,9 @@ $("#setTarget").click(function(){
     targetZ = $("#targetZ").val()
     if ($.isNumeric(targetX)&&$.isNumeric(targetY)&&$.isNumeric(targetZ)){ // 只有全为数字的时候才继续执行
         let targetAdd = [targetX,targetY]
-        testPoint.push(targetAdd) // 这里抛弃了targetZ
+        testPoint.push(targetAdd) // 这里抛弃了targetZ，把targetAdd的新数据push进testPoint目标点数组
         let targetAdd2 = [targetX,targetY,targetZ]
-        targetList.push(targetAdd2)
+        targetList.push(targetAdd2) //保留targetZ，目的是计算当前点坐标和目标的三维坐标差值，给出调整量
         console.log('当前增加目标为 ' +　String(targetAdd))
         console.log('全部目标为 ' +　String(testPoint))
         myChart.setOption({
@@ -191,31 +194,32 @@ $("#setTarget").click(function(){
     }
 });
 
-// 用于遍历的函数，输入目标坐标和当前坐标，返回差值数组
+
+// 用于遍历的函数，输入目标坐标和当前坐标，返回差值数组，差值很重要
 function calcDelta(target,current){
     return [target[0]-current[0],target[1]-current[1],target[2]-current[2]];
 }
 
-// 用于求距离的函数，输入差值数组，返回绝对值之和
+// 用于求距离的函数，输入差值数组，返回绝对值之和，曼哈顿距离
 function calcDistance(delta) {
     return Math.abs(delta[0]) + Math.abs(delta[1]) + Math.abs(delta[2]);
 }
 
-// 遍历目标点数组，求差值用于求最近路径和调整量，用于定时器调用或画图时调用
+// 遍历目标点数组(let i in targetList)，求差值用于求最近路径和调整量，用于画图时调用
 // current应是加了初始高度的
 async function calcNext(targetList,current) {
     let deltaList = [];
     let distanceList = [];
     if(targetList.length !== 0){
         console.log('求最近距离！')
-        for(let i in targetList) {
-            let temp = calcDelta(targetList[i],current);
+        for(let i in targetList) { //遍历含z的目标点数组
+            let temp = calcDelta(targetList[i],current); //计算所有差值
             deltaList.push(temp)
-            distanceList.push(calcDistance(temp))
+            distanceList.push(calcDistance(temp)) //根据坐标差值更新距离
         }
-        let min = Math.min.apply(null, distanceList);
+        let min = Math.min.apply(null, distanceList); //求出最小距离
         let nextIndex = distanceList.indexOf(min); // 求出最小距离的索引
-        let deltaNext = deltaList[nextIndex]
+        let deltaNext = deltaList[nextIndex] //根据最小距离的索引反推出到达距离最小的目标的调整量
         console.log('最小距离为：' +　String(min))
         console.log('最近点为：' +　String(targetList[nextIndex]))
         console.log('delta为：' +　String(deltaNext))

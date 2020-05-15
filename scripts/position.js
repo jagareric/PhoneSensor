@@ -44,7 +44,7 @@ function position(data_pre, data_now, data_post){
         s1[1] = s0[1] ;
         s1[2] = s0[2] ;
         // 画图
-        returnData = {number: id, location:[s1[0],s1[1],s1[2]]}
+        returnData = {number: id, location:[s1[0],s1[1],s1[2]]}  //重要的返回数组
         addData2(returnData);
         s0 = s1;
         v0 = [0,0,0];
@@ -55,11 +55,12 @@ function position(data_pre, data_now, data_post){
     if(c===1){// 非0加速度条件下
         H1 = [[0,-wx,-wy,-wz],[wx,0,wz,-wy],[wy,-wz,0,wx],[wz,wy,-wx,0]];  // 四维角速度矩阵
         q1 = q1_cal(T);  // 四元数矩阵4*1
-        pos_cal(ax, ay, az, T);  // 把数据写入进数据库中，然后重置此处数组
+        pos_cal(ax, ay, az, T);  // 计算得到当前点的位置，把数据写入进数据库中，然后重置此处数组
         returnData = {number: id, location:[s1[0],s1[1],s1[2]]};
         // console.log(s1[0],s1[1],s1[2]);
-        addData2(returnData);  // 调用画图函数
-        // 重置数据
+        //不用把所有的点都画出来
+        addData2(returnData);  // 调用画图函数，传入的参数为当前点的数据唯一标识和三维位置坐标
+        // 重置速度，位置，角速度，四元数 数据
         v0 = v1;
         s0 = s1;
         H0 = H1;
