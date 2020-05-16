@@ -7,18 +7,6 @@ H0 = H1 = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
 function position(data_pre, data_now, data_post){
     // 调用本函数的时候就已经从内存数据库中提取所存储的数据
     // data_now表示当前时间点 data_pre表示前五十个点的数据，同理data_post为后五十个点，总共101个点。
-    // console.log(s0);
-    // console.log(s0[1]);
-    // console.log(s0[2]);
-    // console.log(s1);
-    // console.log(s1[1]);
-    // console.log(s1[2]);
-    // console.log(v0);
-    // console.log(v0[1]);
-    // console.log(v0[2]);
-    // console.log(v1);
-    // console.log(v1[1]);
-    // console.log(v1[2]);
     var id, ax, ay, az, wx, wy, wz, T;
     var returnData;
     // 在数据库里面的数据量足够的情况下提取数据，否则会出现读取错误
@@ -26,6 +14,10 @@ function position(data_pre, data_now, data_post){
     wx = data_now.wx;
     wy = data_now.wy;
     wz = data_now.wz;
+    //把角速度从°/s转换成rad/s
+    wx = wx * Math.PI / 180;
+    wy = wy * Math.PI / 180;
+    wz = wz * Math.PI / 180;
     ax = data_now.ax;
     ay = data_now.ay;
     az = data_now.az;
@@ -48,7 +40,7 @@ function position(data_pre, data_now, data_post){
         addData2(returnData);
         s0 = s1;
         v0 = [0,0,0];
-        //q0 = [[1],[0],[0],[0]]; //！！！这里有问题。四元数重置不能重置成1000，需要重置为前一个时刻的四元数！！！
+        //q0 = [[1],[0],[0],[0]]; //！！！四元数重置不能重置成1000，需要重置为前一个时刻的四元数！！！
         H0 = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];  // 重置4维化角速度矩阵，因视作静止，角速度计0
     }
 
