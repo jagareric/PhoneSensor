@@ -18,8 +18,8 @@ function position(data_pre, data_now, data_post){
     wx = wx * Math.PI / 180;
     wy = wy * Math.PI / 180;
     wz = wz * Math.PI / 180;
-    ax = data_now.ax;
-    ay = data_now.ay;
+    ax = - data_now.ax;
+    ay = - data_now.ay;
     az = data_now.az;
     T = (data_now.time - data_pre[49].time) * 0.001;
     // data_pre[49]为当前时刻的上一时刻点
