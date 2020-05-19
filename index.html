@@ -91,7 +91,6 @@
         </ul>
     </div>
 </div>
-<!--该行用webpack打包时注释，直接使用时不注释-->
 <script type="text/javascript" src="./scripts/index.js"></script>
 <script type="text/javascript" src="./scripts/position.js"></script>
 <script type="text/javascript" src="./scripts/math.min.js"></script>
@@ -127,10 +126,10 @@
 
                 CalPath.insert( { id: idNow, time: timeNow - startTime,
                     ax: accelerationX, ay: accelerationY, az: accelerationZ,
-                    wx: rotationAlpha, wy: rotationBeta, wz: rotationGamma,
+                    wx: rotationBeta, wy: rotationGamma, wz: rotationAlpha,
                 } );
 
-                if(idNow >= (numberPre + 1 + numberPost))/*&counter去计数，每100个，取mod模，counter100=0；counter作为全剧变量，每次+1没100个更新一次*/{
+                if(idNow >= (numberPre + 1 + numberPost)){
                     let data_all = CalPath.chain().offset(idNow - (numberPre + 1 + numberPost)).limit(numberPre + 1 + numberPost).data();
                     position(data_all.slice(0, numberPre), data_all[numberPre], data_all.slice(numberPre + 1));
                 }
@@ -151,8 +150,7 @@
                 ax: 0, ay: 0, az: 0,
                 wx: 0, wy: 0, wz: 0,
                 vx: 0, vy: 0, vz: 0,
-                sx: 0, sy: 0, sz: 0,
-                used: false, calculated: false
+                sx: 0, sy: 0, sz: 0,                
             } );
 
             if(idNow >= (numberPre + 1 + numberPost)){
@@ -171,11 +169,10 @@
         idNow = 1;
         for(let i = 0; i < 600; i++){
             CalPath.insert( { id: idNow, time: fakeTime,
-                ax: 1, ay: 1.5, az: 0,
+                ax: 1, ay: 0, az: 0,
                 wx: 0, wy: 0, wz: 0,
                 vx: 0, vy: 0, vz: 0,
                 sx: 0, sy: 0, sz: 0,
-                used: false, calculated: false
             } );
 
             if(idNow >= (numberPre + 1 + numberPost)){
@@ -184,7 +181,7 @@
             }
 
             idNow++;
-            fakeTime += 0.01;
+            fakeTime += 2;
         }
     }
 
@@ -198,7 +195,6 @@
                 wx: 0, wy: 0, wz: 0,
                 vx: 0, vy: 0, vz: 0,
                 sx: 0, sy: 0, sz: 0,
-                used: false, calculated: false
             } );
 
             if(idNow >= (numberPre + 1 + numberPost)){
@@ -216,7 +212,6 @@
                 wx: 0, wy: 0, wz: 0,
                 vx: 0, vy: 0, vz: 0,
                 sx: 0, sy: 0, sz: 0,
-                used: false, calculated: false
             } );
 
             if(idNow >= (numberPre + 1 + numberPost)){
@@ -239,7 +234,6 @@
                 wx: 0, wy: 0, wz: 0,
                 vx: 0, vy: 0, vz: 0,
                 sx: 0, sy: 0, sz: 0,
-                used: false, calculated: false
             } );
 
             if(idNow >= (numberPre + 1 + numberPost)){
@@ -260,7 +254,6 @@
                 wx: 0, wy: 0, wz: 0,
                 vx: 0, vy: 0, vz: 0,
                 sx: 0, sy: 0, sz: 0,
-                used: false, calculated: false
             } );
 
             if(idNow >= (numberPre + 1 + numberPost)){
@@ -284,7 +277,6 @@
                 wx: 0, wy: 0, wz: 0,
                 vx: 0, vy: 0, vz: 0,
                 sx: 0, sy: 0, sz: 0,
-                used: false, calculated: false
             } );
 
             if(idNow >= (numberPre + 1 + numberPost)){
@@ -304,7 +296,6 @@
                 wx: 0, wy: 0, wz: wzz,
                 vx: 0, vy: 0, vz: 0,
                 sx: 0, sy: 0, sz: 0,
-                used: false, calculated: false
             } );
 
             if(idNow >= (numberPre + 1 + numberPost)){
@@ -327,7 +318,6 @@
                 wx: 0, wy: 0, wz: 0,
                 vx: 0, vy: 0, vz: 0,
                 sx: 0, sy: 0, sz: 0,
-                used: false, calculated: false
             } );
 
             if(idNow >= (numberPre + 1 + numberPost)){
@@ -345,7 +335,6 @@
                 wx: 0, wy: 0, wz: 0,
                 vx: 0, vy: 0, vz: 0,
                 sx: 0, sy: 0, sz: 0,
-                used: false, calculated: false
             } );
 
             if(idNow >= (numberPre + 1 + numberPost)){
@@ -364,7 +353,6 @@
                 wx: 0, wy: 0, wz: 0,
                 vx: 0, vy: 0, vz: 0,
                 sx: 0, sy: 0, sz: 0,
-                used: false, calculated: false
             });
 
             if (idNow >= (numberPre + 1 + numberPost)) {
@@ -382,7 +370,6 @@
                 wx: 0, wy: 0, wz: Math.PI * 0.5,
                 vx: 0, vy: 0, vz: 0,
                 sx: 0, sy: 0, sz: 0,
-                used: false, calculated: false
             } );
 
             if(idNow >= (numberPre + 1 + numberPost)){
@@ -401,7 +388,6 @@
                     wx: 0, wy: 0, wz: 0,
                     vx: 0, vy: 0, vz: 0,
                     sx: 0, sy: 0, sz: 0,
-                    used: false, calculated: false
                 });
 
                 if (idNow >= (numberPre + 1 + numberPost)) {
@@ -419,7 +405,6 @@
                 wx: 0, wy: 0, wz: 0,
                 vx: 0, vy: 0, vz: 0,
                 sx: 0, sy: 0, sz: 0,
-                used: false, calculated: false
             } );
 
             if(idNow >= (numberPre + 1 + numberPost)){
@@ -437,7 +422,6 @@
                 wx: 0, wy: 0, wz: 0,
                 vx: 0, vy: 0, vz: 0,
                 sx: 0, sy: 0, sz: 0,
-                used: false, calculated: false
             } );
 
             if(idNow >= (numberPre + 1 + numberPost)){
