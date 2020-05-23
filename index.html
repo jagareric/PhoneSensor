@@ -126,7 +126,9 @@
 
                 CalPath.insert( { id: idNow, time: timeNow - startTime,
                     ax: accelerationX, ay: accelerationY, az: accelerationZ,
-                    wx: rotationBeta, wy: rotationGamma, wz: rotationAlpha,
+                    wx: rotationAlpha, wy: rotationBeta, wz: rotationGamma,
+                    // wx: rotationGamma, wy: rotationAlpha, wz: rotationBeta,
+                    // wx: rotationBeta, wy: rotationGamma, wz: rotationAlpha,
                 } );
 
                 if(idNow >= (numberPre + 1 + numberPost)){
