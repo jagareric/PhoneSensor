@@ -18,9 +18,29 @@ function position(data_pre, data_now, data_post){
     wx = wx * Math.PI / 180;
     wy = wy * Math.PI / 180;
     wz = wz * Math.PI / 180;
-    ax = - data_now.ax;
-    ay = - data_now.ay;
-    az = data_now.az;
+    //滑动均值滤波
+    var N = 51; // N = numberPre + 1;
+    var sumdata_ax = 0;
+    var sumdata_ay = 0;
+    var sumdata_az = 0;
+    var sumdata_wx = 0;
+    var sumdata_wy = 0;
+    var sumdata_wz = 0;
+    for (let i = 0; i < 50; i++) {
+        sumdata_ax = sumdata_ax + data_pre[i].ax;
+        sumdata_ay = sumdata_ay + data_pre[i].ay;
+        sumdata_az = sumdata_az + data_pre[i].az;
+        // sumdata_wx = sumdata_wx + data_pre[i].wx;  //角速度先不要滤波，可能出现差错
+        // sumdata_wy = sumdata_wy + data_pre[i].wy;
+        // sumdata_wz = sumdata_wz + data_pre[i].wz;
+    }
+    ax = (sumdata_ax + data_now.ax) / N;
+    ay = (sumdata_ay + data_now.ay) / N;
+    az = (sumdata_az + data_now.az) / N;
+    // wx = (sumdata_wx + data_now.wx) / N;
+    // wy = (sumdata_wy + data_now.wy) / N;
+    // wz = (sumdata_wz + data_now.wz) / N;
+    
     T = (data_now.time - data_pre[49].time) * 0.001;
     // data_pre[49]为当前时刻的上一时刻点
     var c = zero_judge(data_pre, data_now, data_post);
@@ -123,7 +143,6 @@ function pos_cal(ax, ay, az, T){
     C = [[c1,c4,c7],[c2,c5,c8],[c3,c6,c9]];
     a = [[ax],[ay],[az]];
     a = math.multiply(C,a);
-    // a[2][0] = a[2][0] + g;
     v1[0] = v0[0] + a[0][0] * T;
     v1[1] = v0[1] + a[1][0] * T;
     v1[2] = v0[2] + a[2][0] * T;
