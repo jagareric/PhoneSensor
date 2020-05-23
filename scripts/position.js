@@ -18,8 +18,8 @@ function position(data_pre, data_now, data_post){
     wx = wx * Math.PI / 180;
     wy = wy * Math.PI / 180;
     wz = wz * Math.PI / 180;
-    ax = -data_now.ax;
-    ay = -data_now.ay;
+    ax = data_now.ax;
+    ay = data_now.ay;
     az = data_now.az;
     //滑动均值滤波
     // var N = 51; // N = numberPre + 1;
